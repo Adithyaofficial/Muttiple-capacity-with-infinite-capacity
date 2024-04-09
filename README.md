@@ -1,11 +1,6 @@
-# Multiple server with infinite capacity - (M/M/c):(oo/FIFO)
-
-# NAME : AVINASH T
-
-# REG NO : 212223230026
-
+# Single server with infinite capacity (M/M/1):(oo/FIFO)
 ## Aim :
-To find (a) average number of materials in the system (b) average number of materials in the conveyor (c) waiting time of each material in the system (d) waiting time of each material in the conveyor, if the arrival  of materials follow poisson process with the mean interval time 10 seconds, serivice time of two lathe machine follow exponential distribution with mean serice time 1 second and average service time of robot is 7seconds.
+To find (a) average number of materials in the system (b) average number of materials in the conveyor (c) waiting time of each material in the system (d) waiting time of each material in the conveyor, if the arrival  of materials follow poisson process with the mean interval time 12 seconds, serivice time of lathe machine follows exponential distribution with mean serice time 1 second and average service time of robot is 7seconds.
 
 ## Software required :
 Visual components and Python
@@ -13,58 +8,50 @@ Visual components and Python
 ## Theory:
 Queuing are the most frequently encountered problems in everyday life. For example, queue at a cafeteria, library, bank, etc. Common to all of these cases are the arrivals of objects requiring service and the attendant delays when the service mechanism is busy. Waiting lines cannot be eliminated completely, but suitable techniques can be used to reduce the waiting time of an object in the system. A long waiting line may result in loss of customers to an organization. Waiting time can be reduced by providing additional service facilities, but it may result in an increase in the idle time of the service mechanism.
 
-![image](https://user-images.githubusercontent.com/103921593/203238035-1c8109bc-cbf2-4c77-baea-c5b682a752ef.png)
+![image](1.png)
+
+This is a queuing model in which the arrival is Marcovian and departure distribution is also Marcovian,number of server is one and size of the queue is also Marcovian,no.of server is one and size of the queue is infinite and service discipline is 1st come 1st serve(FCFS) and the calling source is also finite.
 
 ## Procedure :
 
-![image](https://user-images.githubusercontent.com/103921593/203238265-176740b0-eae2-4772-90be-5449869ac9b0.png)
+![imAGE](2.png)
 
 ## Experiment:
-![exp5 1](https://github.com/nithin-popuri7/Muttiple-capacity-with-infinite-capacity/assets/94154780/1d35f4d1-3104-44f4-8c5c-269d611eaee2)
+![Exp 4 1](https://github.com/21003698/Single-server-infinite-capacity---Markov-Model/assets/93427522/2960ee3e-7325-4e09-85e1-ae816ceaaab3)
 
-![exp5 2](https://github.com/nithin-popuri7/Muttiple-capacity-with-infinite-capacity/assets/94154780/13d30585-0c48-4b29-be60-57aa39e77fbf)
+![Exp 4 2](https://github.com/21003698/Single-server-infinite-capacity---Markov-Model/assets/93427522/f5b111fa-a1b3-47ce-b862-a071560beec0)
 
-## Program:
-
-
-```
-import math
+## Program
+```python
 arr_time=float(input("Enter the mean inter arrival time of objects from Feeder (in secs): "))
 ser_time=float(input("Enter the mean  inter service time of Lathe Machine (in secs) :  "))
 Robot_time=float(input("Enter the Additional time taken for the Robot (in secs) :  "))
-c=int(input("Number of service centre :  "))
 lam=1/arr_time
 mu=1/(ser_time+Robot_time)
 print("--------------------------------------------------------------")
-print("Multiple Server with Infinite Capacity - (M/M/c):(oo/FIFO)")
+print("Single Server with Infinite Capacity - (M/M/1):(oo/FIFO)")
 print("--------------------------------------------------------------")
 print("The mean arrival rate per second : %0.2f "%lam)
 print("The mean service rate per second : %0.2f "%mu)
-rho=lam/(c*mu)
-sum=(lam/mu)**c*(1/(1-rho))/math.factorial(c)
-for i in range(0,c):
-    sum=sum+(lam/mu)**i/math.factorial(i)
-P0=1/sum
-if (rho<1):
-    Lq=(P0/math.factorial(c))*(1/c)*(lam/mu)**(c+1)/(1-rho)**2
-    Ls=Lq+lam/mu
+if (lam <  mu):
+    Ls=lam/(mu-lam)
+    Lq=Ls-lam/mu
     Ws=Ls/lam
     Wq=Lq/lam
     print("Average number of objects in the system : %0.2f "%Ls)
     print("Average number of objects in the conveyor :  %0.2f "%Lq)
     print("Average waiting time of an object in the system : %0.2f secs"%Ws)
     print("Average waiting time of an object in the conveyor : %0.2f secs"%Wq)
-    print("Probability that the system is busy : %0.2f "%(rho))
-    print("Probability that the system is empty : %0.2f "%(1-rho))
+    print("Probability that the system is busy : %0.2f "%(lam/mu) )
+    print("Probability that the system is empty : %0.2f "%(1-lam/mu) )
 else:
     print("Warning! Objects Over flow will happen in the conveyor")
-print("--------------------------------------------------------------")
+print("---------------------------------------------------------------")
 ```
 
 ## Output :
-
-![image](https://github.com/AVINASH05T/Muttiple-capacity-with-infinite-capacity/assets/151514286/7d06356e-bc12-4003-9afb-57baaccfa0d5)
+![out](https://github.com/21003698/Single-server-infinite-capacity---Markov-Model/assets/93427522/56a83ac2-cbd6-41e5-a0ab-788d37c1160d)
 
 
 ## Result :
-Thus the average number of materials in the system and conveyor, waiting time of each material in the system and conveyor is found successfully.
+The average number of material in the sysytem and in the conveyor and waiting time are successfully found.
